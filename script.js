@@ -3,6 +3,21 @@ let doorImage2 = document.getElementById('door2');
 let doorImage3 = document.getElementById('door3');
 let startButton = document.getElementById('start');
 
+
+
+let botDoorPath = 'https://content.codecademy.com/projects/chore-door/images/robot.svg';
+let beachDoorPath = 'https://content.codecademy.com/projects/chore-door/images/beach.svg';
+let spaceDoorPath = 'https://content.codecademy.com/projects/chore-door/images/space.svg';
+let closedDoorPath = 'https://content.codecademy.com/projects/chore-door/images/closed_door.svg';
+
+let numClosedDoors = 3;
+let openDoor1;
+let openDoor2;
+let openDoor3;
+let currentlyPlaying = true;
+
+// Define game logic to check doors, progress game, end game, and choose a random chore door
+
 function isClicked(door) {
     if (door.src === closedDoorPath) {
         return true;
@@ -19,18 +34,23 @@ function isBot(door) {
     }
 }
 
-let botDoorPath = 'https://content.codecademy.com/projects/chore-door/images/robot.svg';
-let beachDoorPath = 'https://content.codecademy.com/projects/chore-door/images/beach.svg';
-let spaceDoorPath = 'https://content.codecademy.com/projects/chore-door/images/space.svg';
-let closedDoorPath = 'https://content.codecademy.com/projects/chore-door/images/closed_door.svg';
+function gameOver(status) {
+    if (status === 'win') {
+        startButton.textContent = 'You win! Play again?';
+    } else {
+        startButton.textContent = 'Game over! Play again?';
+    }
+    currentlyPlaying = false;
+}
 
-let numClosedDoors = 3;
-let openDoor1;
-let openDoor2;
-let openDoor3;
-let currentlyPlaying = true;
-
-// Define game logic to check doors, progress game, end game, and choose a random chore door
+function playDoor(door) {
+    numClosedDoors --;
+    if (numClosedDoors === 0) {
+        gameOver('win');
+    } else if (isBot(door) === true) {
+        gameOver();
+    }
+}
 
 
 doorImage1.onclick = () => {
