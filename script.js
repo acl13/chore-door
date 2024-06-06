@@ -98,3 +98,16 @@ startButton.onclick = () => {
 }
 
 // Start a game round
+
+function startRound() {
+    doorImage1.src = closedDoorPath;
+    doorImage2.src = closedDoorPath;
+    doorImage3.src = closedDoorPath;
+    numClosedDoors = 3;
+    currentlyPlaying = true;
+    startButton.textContent = 'Good Luck!';
+    randomChoreDoorGenerator();
+
+}
+
+startRound();
